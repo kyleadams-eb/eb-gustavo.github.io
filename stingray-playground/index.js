@@ -27,7 +27,7 @@ function buildWidgetContainer(eventId, modal, affiliateCode, n) {
         var button = document.createElement('button');
         var buttonLabel = document.createTextNode('Launch Modal ()');
 
-        button.id = 'modal-trigger-' + n;
+        button.id = 'modal-trigger-' + n + ' ';
         button.type = 'button';
         button.appendChild(buttonLabel);
         checkoutWidget.appendChild(button);
