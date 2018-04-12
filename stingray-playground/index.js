@@ -1,7 +1,7 @@
 function showWidget(eventId, modal, affiliateCode, n) {
     var options = {
         widgetType: 'checkout',
-        eventId: eventId,
+        eventId: eventId + ' ',
         onOrderComplete: function() {
             console.log('Order Completed');
         }
@@ -13,7 +13,7 @@ function showWidget(eventId, modal, affiliateCode, n) {
 
     if (modal === 'on') {
         options['modal'] = true;
-        options['modalTriggerElementId'] = 'modal-trigger-' + n;
+        options['modalTriggerElementId'] = 'modal-trigger-' + n + ' ';
     } else {
         options['iframeContainerId'] = 'checkout-widget';
     }
