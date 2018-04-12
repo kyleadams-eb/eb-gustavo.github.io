@@ -1,4 +1,4 @@
-function showWidget(eventId, modal, affiliateCode) {
+function showWidget(eventId, modal, affiliateCode, n) {
     var options = {
         widgetType: 'checkout',
         eventId: eventId,
@@ -13,7 +13,7 @@ function showWidget(eventId, modal, affiliateCode) {
 
     if (modal === 'on') {
         options['modal'] = true;
-        options['modalTriggerElementId'] = 'modal-trigger';
+        options['modalTriggerElementId'] = 'modal-trigger-' + n;
     } else {
         options['iframeContainerId'] = 'checkout-widget';
     }
@@ -21,20 +21,20 @@ function showWidget(eventId, modal, affiliateCode) {
     EBWidgets.createWidget(options);
 }
 
-function buildWidgetContainer(eventId, modal, affiliateCode) {
+function buildWidgetContainer(eventId, modal, affiliateCode, n) {
     if (modal === 'on') {
         var checkoutWidget = document.getElementById('button-container')
         var button = document.createElement('button');
         var buttonLabel = document.createTextNode('Launch Modal ()');
 
-        button.id = 'modal-trigger';
+        button.id = 'modal-trigger-' + n;
         button.type = 'button';
         button.appendChild(buttonLabel);
         checkoutWidget.appendChild(button);
         button.className = 'btn primary w-button';
     }
 
-    showWidget(eventId, modal, affiliateCode);
+    showWidget(eventId, modal, affiliateCode, n);
 }
 
 function decode(value, replaceRegex) {
@@ -64,15 +64,19 @@ function downloadWidgetJs(urlParams) {
 
     scriptElement.type = 'text/javascript';
     scriptElement.src = widgetUrlMap[urlParams.env];
-    scriptElement.addEventListener('load', buildWidgetContainer.bind(null, urlParams.eid, urlParams.modal, urlParams.affiliateCode))
+    scriptElement.addEventListener('load', buildWidgetContainer.bind(null, urlParams.eid1, urlParams.modal1, urlParams.affiliateCode1, 1))
+    scriptElement.addEventListener('load', buildWidgetContainer.bind(null, urlParams.eid2, urlParams.modal2, urlParams.affiliateCode2, 2))
     document.getElementsByTagName('head')[0].appendChild(scriptElement);
 }
 
 function fillForm(urlParams) {
     document.getElementsByName('env')[0].value = urlParams.env;
-    document.getElementsByName('eid')[0].value = urlParams.eid;
-    document.getElementsByName('modal')[0].checked = urlParams.modal === 'on';
-    document.getElementsByName('affiliateCode')[0].value = urlParams.affiliateCode;
+    document.getElementsByName('eid1')[0].value = urlParams.eid1;
+    document.getElementsByName('modal1')[0].checked = urlParams.modal1 === 'on';
+    document.getElementsByName('modal2')[0].checked = urlParams.modal2 === 'on';
+    document.getElementsByName('affiliateCode1')[0].value = urlParams.affiliateCode1;
+    document.getElementsByName('eid2')[0].value = urlParams.eid2;
+    document.getElementsByName('affiliateCode2')[0].value = urlParams.affiliateCode2;
 }
 
 function initApp() {
