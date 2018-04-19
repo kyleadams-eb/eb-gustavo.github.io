@@ -15,7 +15,7 @@ function showWidget(eventId, modal, affiliateCode, n) {
         options['modal'] = true;
         options['modalTriggerElementId'] = 'modal-trigger-' + n;
     } else {
-        options['iframeContainerId'] = 'checkout-widget';
+        options['iframeContainerId'] = 'checkout-widget' + n;
     }
 
     EBWidgets.createWidget(options);
