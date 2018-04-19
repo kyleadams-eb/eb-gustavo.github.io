@@ -1,7 +1,7 @@
 function showWidget(eventId, modal, affiliateCode, n) {
     var options = {
         widgetType: 'checkout',
-        eventId: eventId + ' ',
+        eventId: eventId,
         onOrderComplete: function() {
             console.log('Order Completed');
         }
@@ -13,7 +13,7 @@ function showWidget(eventId, modal, affiliateCode, n) {
 
     if (modal === 'on') {
         options['modal'] = true;
-        options['modalTriggerElementId'] = 'modal-trigger-' + n + ' ';
+        options['modalTriggerElementId'] = 'modal-trigger-' + n;
     } else {
         options['iframeContainerId'] = 'checkout-widget';
     }
@@ -27,7 +27,7 @@ function buildWidgetContainer(eventId, modal, affiliateCode, n) {
         var button = document.createElement('button');
         var buttonLabel = document.createTextNode('Launch Modal ()');
 
-        button.id = 'modal-trigger-' + n + ' ';
+        button.id = 'modal-trigger-' + n;
         button.type = 'button';
         button.appendChild(buttonLabel);
         checkoutWidget.appendChild(button);
@@ -59,6 +59,7 @@ function downloadWidgetJs(urlParams) {
     var widgetUrlMap = {
         dev: 'https://www.evbdev.com/static/widgets/eb_widgets.js',
         qa: 'https://www.evbqa.com/static/widgets/eb_widgets.js',
+        qa3: 'https://www.evbqa3.com/static/widgets/eb_widgets.js',
         prod: 'https://www.eventbrite.com/static/widgets/eb_widgets.js'
     };
 
